@@ -18,5 +18,8 @@
   "homepage": "https://github.com/abigailroberg/team-profiles#readme",
   "devDependencies": {
     "jest": "^27.1.0"
+  },
+  "dependencies": {
+    "inquirer": "^8.1.2"
   }
 }
