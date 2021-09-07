@@ -3,14 +3,20 @@ function renderEmployees(employeeArr) {
     let htmlText =''
     employeeArr.forEach(element => {
         htmlText = htmlText + 
-        `<div class="col-2">
-         <div class="card">
-            <h4 class="card-header">${element.name}</h4>
-            <h4 class="card-header">Manager</h4>
-            <h5 class="card-body">ID: ${element.id}</h5>
-            <h5 class="card-body">Email: ${element.email}</h5>
-        </div>
-    </div>`
+        `
+        <div class="col-1"></div>
+        <div class="col-3">
+            <div class="card">
+                <h4 class="card-header">${element.name}</br>
+                    <span class="font-weight-light">${element.type}</span>
+                </h4>
+                <p class="card-body">
+                    <span class="font-weight-bold">ID:</span> ${element.id}</br>
+                    <span class="font-weight-bold">Email:</span> ${element.email}</br>
+                    <span class="font-weight-bold">${element.info}:</span> ${element.extra}</br>
+                </p>
+            </div>
+        </div>`
     })
     return htmlText
 }
@@ -37,10 +43,12 @@ function renderPage(employeeArr) {
             <div class="row justify-content-center bg-primary text-white">
                 <h1>My Team</h1>
             </div>
+
             <div class="row">
-            ${employees}
-            </main>
-            </body>`
+                ${employees}
+            </div>
+        </main>
+    </body>`
 }
 
 module.exports = renderPage

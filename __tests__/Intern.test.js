@@ -7,7 +7,7 @@ test('creates a new intern object', () => {
     expect(intern.name).toBe('name')
     expect(intern.id).toBe('id')
     expect(intern.email).toBe('email')
-    expect(intern.school).toBe('school')
+    expect(intern.extra).toBe('school')
 })
 
 test('gets intern info as an object', () => {

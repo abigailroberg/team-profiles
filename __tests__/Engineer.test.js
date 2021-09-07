@@ -7,7 +7,7 @@ test('creates a new engineer object', () => {
     expect(engineer.name).toBe('name')
     expect(engineer.id).toBe('id')
     expect(engineer.email).toBe('email')
-    expect(engineer.github).toBe('github')
+    expect(engineer.extra).toBe('github')
 })
 
 test('gets engineer info as an object', () => {

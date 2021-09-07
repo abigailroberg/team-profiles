@@ -7,7 +7,7 @@ test('creates a new manager object', () => {
     expect(manager.name).toBe('name')
     expect(manager.id).toBe('id')
     expect(manager.email).toBe('email')
-    expect(manager.phone).toBe('phone')
+    expect(manager.extra).toBe('phone')
 })
 
 test('gets manager info as an object', () => {

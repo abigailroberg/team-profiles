@@ -4,6 +4,7 @@ const renderPage = require('./src/generateHTML')
 const fs = require('fs')
 const { resolve } = require('path')
 const Engineer = require('./lib/Engineer')
+const Intern = require('./lib/Intern')
 
 // create array to hold all employee objects
 const teamArr = []
@@ -42,23 +43,11 @@ const addEmployee = () => {
     return inquirer.prompt([
         {
             type: 'list',
-            name: 'add',
-            message: 'Would you like to add another employee?',
-            choices: ['Yes', "No"]
+            name: 'type',
+            message: 'Which type of employee would you like to add?',
+            choices: ['Engineer', 'Intern']
         }
     ])
-    .then(({ add }) => {
-        if(add === 'Yes') {
-            return inquirer.prompt([
-                {
-                    type: 'list',
-                    name: 'type',
-                    message: 'Which type of employee would you like to add?',
-                    choices: ['Engineer', 'Intern']
-                }
-            ])
-        }
-    })
     .then(({ type }) => {
         if(type === 'Engineer') {
             return inquirer.prompt([
@@ -81,14 +70,63 @@ const addEmployee = () => {
                     type: 'input',
                     name: 'github',
                     message: 'GitHub username:'
+                },
+                {
+                    type: 'confirm',
+                    name: 'add',
+                    message: 'Would you like to add another employee?',
+                    default: false
                 }
             ])
-            .then(addEmployee => {
-                const eng = new Engineer(addEmployee.name, addEmployee.id, addEmployee.email, addEmployee.github)
+            .then(employeeData => {
+                const eng = new Engineer(employeeData.name, employeeData.id, employeeData.email, employeeData.github)
                 teamArr.push(eng)
                 console.log(teamArr)
+                if(employeeData.add) {
+                    return addEmployee()
+                } else {
+                    return
+                }
             })
         }
+        return inquirer.prompt([
+            {
+                type: 'input',
+                name: 'name',
+                message: 'Employee Name:'
+            },
+            {
+                type: 'input',
+                name: 'id',
+                message: 'Employee ID:'
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: 'Email Address:'
+            },
+            {
+                type: 'input',
+                name: 'school',
+                message: 'School:'
+            },
+            {
+                type: 'confirm',
+                name: 'add',
+                    message: 'Would you like to add another employee?',
+                    default: false
+            }
+        ])
+        .then(employeeData => {
+            const intern = new Intern(employeeData.name, employeeData.id, employeeData.email, employeeData.school)
+            teamArr.push(intern)
+            console.log(teamArr)
+            if(employeeData.add) {
+                return addEmployee()
+            } else {
+                return
+            }
+        })
     })
 }
 
@@ -111,9 +149,12 @@ function writeToFile(fileName, data) {
 function init() {
     mgrInput()
     .then(mgrInputData => {
+        return addEmployee()
+    })
+    .then(addEmployeeData => {
         writeToFile('./dist/index.html', renderPage(teamArr))
     })
-       
+    
     .catch((err) => {
         console.log(err)
     })
