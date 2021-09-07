@@ -3,7 +3,10 @@ const Manager = require('./lib/Manager')
 const renderPage = require('./src/generateHTML')
 const fs = require('fs')
 const { resolve } = require('path')
-const addMgr = require('./src/addEmployee')
+const Engineer = require('./lib/Engineer')
+
+// create array to hold all employee objects
+const teamArr = []
 
 // prompt user for manager info
 const mgrInput = () => {
@@ -29,6 +32,10 @@ const mgrInput = () => {
             message: 'Manager Office Phone Number:'
         }
     ])
+    .then(mgrInput => {
+        const mgr = new Manager(mgrInput.name, mgrInput.id, mgrInput.email, mgrInput.phone)
+        teamArr.push(mgr)
+    })
 }
 
 const addEmployee = () => {
@@ -41,18 +48,48 @@ const addEmployee = () => {
         }
     ])
     .then(({ add }) => {
-        if(add === 'yes') {
+        if(add === 'Yes') {
             return inquirer.prompt([
                 {
                     type: 'list',
-                    name: 'employeeType',
+                    name: 'type',
                     message: 'Which type of employee would you like to add?',
                     choices: ['Engineer', 'Intern']
                 }
             ])
         }
-    }
-    )
+    })
+    .then(({ type }) => {
+        if(type === 'Engineer') {
+            return inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'name',
+                    message: 'Employee Name:'
+                },
+                {
+                    type: 'input',
+                    name: 'id',
+                    message: 'Employee ID:'
+                },
+                {
+                    type: 'input',
+                    name: 'email',
+                    message: 'Email Address:'
+                },
+                {
+                    type: 'input',
+                    name: 'github',
+                    message: 'GitHub username:'
+                }
+            ])
+            .then(addEmployee => {
+                const eng = new Engineer(addEmployee.name, addEmployee.id, addEmployee.email, addEmployee.github)
+                teamArr.push(eng)
+                console.log(teamArr)
+            })
+        }
+    })
 }
 
 // function to write to a file
@@ -74,7 +111,11 @@ function writeToFile(fileName, data) {
 function init() {
     mgrInput()
     .then(mgrInputData => {
-        addMgr(mgrInputData)
+        writeToFile('./dist/index.html', renderPage(teamArr))
+    })
+       
+    .catch((err) => {
+        console.log(err)
     })
 }
 
