@@ -4,10 +4,9 @@ function renderEmployees(employeeArr) {
     employeeArr.forEach(element => {
         htmlText = htmlText + 
         `
-        <div class="col-1"></div>
-        <div class="col-3">
-            <div class="card">
-                <h4 class="card-header">${element.name}</br>
+        <div class="col-4">
+            <div class="card mgn-btm" id="cards">
+                <h4 class="card-header text-center bg-primary text-white">${element.name}</br>
                     <span class="font-weight-light">${element.type}</span>
                 </h4>
                 <p class="card-body">
@@ -21,6 +20,7 @@ function renderEmployees(employeeArr) {
     return htmlText
 }
 
+// generate html for page, including employee cards
 function renderPage(employeeArr) {
     const employees = renderEmployees(employeeArr)
     return `
@@ -32,7 +32,6 @@ function renderPage(employeeArr) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
       <link rel="stylesheet" href="./style.css" />
       <title>Team Profiles</title>
     </head>
@@ -40,11 +39,11 @@ function renderPage(employeeArr) {
     <body>
     
         <main>
-            <div class="row justify-content-center bg-primary text-white">
+            <div class="row justify-content-center bg-danger text-white">
                 <h1>My Team</h1>
             </div>
 
-            <div class="row">
+            <div class="row justify-content-center">
                 ${employees}
             </div>
         </main>

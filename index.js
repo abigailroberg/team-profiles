@@ -33,12 +33,14 @@ const mgrInput = () => {
             message: 'Manager Office Phone Number:'
         }
     ])
+    // create new Manager from inputs & add to team array
     .then(mgrInput => {
         const mgr = new Manager(mgrInput.name, mgrInput.id, mgrInput.email, mgrInput.phone)
         teamArr.push(mgr)
     })
 }
 
+// prompt user for info about other employees
 const addEmployee = () => {
     return inquirer.prompt([
         {
@@ -49,6 +51,7 @@ const addEmployee = () => {
         }
     ])
     .then(({ type }) => {
+        // prompt user for info about engineer
         if(type === 'Engineer') {
             return inquirer.prompt([
                 {
@@ -78,10 +81,12 @@ const addEmployee = () => {
                     default: false
                 }
             ])
+            // create new Engineer from inputs
             .then(employeeData => {
                 const eng = new Engineer(employeeData.name, employeeData.id, employeeData.email, employeeData.github)
+                // add new Engineer to array
                 teamArr.push(eng)
-                console.log(teamArr)
+                // start addEmployee() if user said to add another
                 if(employeeData.add) {
                     return addEmployee()
                 } else {
@@ -89,6 +94,7 @@ const addEmployee = () => {
                 }
             })
         }
+        // Prompt user for info about an Intern
         return inquirer.prompt([
             {
                 type: 'input',
@@ -117,10 +123,12 @@ const addEmployee = () => {
                     default: false
             }
         ])
+        // Create new Intern from inputs
         .then(employeeData => {
             const intern = new Intern(employeeData.name, employeeData.id, employeeData.email, employeeData.school)
+            // add new Intern to array
             teamArr.push(intern)
-            console.log(teamArr)
+            // start addEmployee() if user said to add another
             if(employeeData.add) {
                 return addEmployee()
             } else {
@@ -146,15 +154,19 @@ function writeToFile(fileName, data) {
     })
 }
 
+// function to initialize app
 function init() {
+    // get manager
     mgrInput()
+    // after manager add employee
     .then(mgrInputData => {
         return addEmployee()
     })
+    // after all employees added, use write html to file
     .then(addEmployeeData => {
         writeToFile('./dist/index.html', renderPage(teamArr))
     })
-    
+    // catch and log any error in the console
     .catch((err) => {
         console.log(err)
     })
