@@ -15,22 +15,54 @@ const mgrInput = () => {
         {
             type: 'input',
             name: 'name',
-            message: 'Manager Name:'
+            message: 'Manager Name:',
+            validate: nameInput => {
+                if(nameInput) {
+                    return true
+                } else {
+                    console.log('Please enter the managers name!')
+                    return false
+                }
+            }
         },
         {
             type: 'input',
             name: 'id',
-            message: 'Manager Employee ID:'
+            message: 'Manager Employee ID:',
+            validate: idInput => {
+                if(idInput) {
+                    return true
+                } else {
+                    console.log('Please enter the managers employee id!')
+                    return false
+                }
+            }
         },
         {
             type: 'input',
             name: 'email',
-            message: 'Manager Email Address:'
+            message: 'Manager Email Address:',
+            validate: emailInput => {
+                if(emailInput) {
+                    return true
+                } else {
+                    console.log('Please enter the managers email!')
+                    return false
+                }
+            }
         },
         {
             type: 'input',
             name: 'phone',
-            message: 'Manager Office Phone Number:'
+            message: 'Manager Office Phone Number:',
+            validate: phoneInput => {
+                if(phoneInput) {
+                    return true
+                } else {
+                    console.log('Please enter the managers phone number!')
+                    return false
+                }
+            }
         }
     ])
     // create new Manager from inputs & add to team array
@@ -57,22 +89,54 @@ const addEmployee = () => {
                 {
                     type: 'input',
                     name: 'name',
-                    message: 'Employee Name:'
+                    message: 'Employee Name:',
+                    validate: nameInput => {
+                        if(nameInput) {
+                            return true
+                        } else {
+                            console.log('Please enter a name for the engineer!')
+                            return false
+                        }
+                    }
                 },
                 {
                     type: 'input',
                     name: 'id',
-                    message: 'Employee ID:'
+                    message: 'Employee ID:',
+                    validate: idInput => {
+                        if(idInput) {
+                            return true
+                        } else {
+                            console.log('Please enter an id for the engineer!')
+                            return false
+                        }
+                    }
                 },
                 {
                     type: 'input',
                     name: 'email',
-                    message: 'Email Address:'
+                    message: 'Email Address:',
+                    validate: emailInput => {
+                        if(emailInput) {
+                            return true
+                        } else {
+                            console.log('Please enter an email address for the engineer!')
+                            return false
+                        }
+                    }
                 },
                 {
                     type: 'input',
                     name: 'github',
-                    message: 'GitHub username:'
+                    message: 'GitHub username:',
+                    validate: githubInput => {
+                        if(githubInput) {
+                            return true
+                        } else {
+                            console.log('Please enter the GitHub username for the engineer!')
+                            return false
+                        }
+                    }
                 },
                 {
                     type: 'confirm',
@@ -99,22 +163,54 @@ const addEmployee = () => {
             {
                 type: 'input',
                 name: 'name',
-                message: 'Employee Name:'
+                message: 'Employee Name:',
+                validate: nameInput => {
+                    if(nameInput) {
+                        return true
+                    } else {
+                        console.log('Please enter a name for the intern!')
+                        return false
+                    }
+                }
             },
             {
                 type: 'input',
                 name: 'id',
-                message: 'Employee ID:'
+                message: 'Employee ID:',
+                validate: idInput => {
+                    if(idInput) {
+                        return true
+                    } else {
+                        console.log('Please enter an ID for the intern!')
+                        return false
+                    }
+                }
             },
             {
                 type: 'input',
                 name: 'email',
-                message: 'Email Address:'
+                message: 'Email Address:',
+                validate: emailInput => {
+                    if(emailInput) {
+                        return true
+                    } else {
+                        console.log('Please enter an email address for the intern!')
+                        return false
+                    }
+                }
             },
             {
                 type: 'input',
                 name: 'school',
-                message: 'School:'
+                message: 'School:',
+                validate: schoolInput => {
+                    if(schoolInput) {
+                        return true
+                    } else {
+                        console.log('Please enter a school for the intern!')
+                        return false
+                    }
+                }
             },
             {
                 type: 'confirm',
