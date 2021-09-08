@@ -268,4 +268,5 @@ function init() {
     })
 }
 
+// run the initializing function
 init()
